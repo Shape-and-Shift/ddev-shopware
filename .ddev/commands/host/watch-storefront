@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Description: Watch Shopware 6 Storefront UI
+## OSTypes: linux,darwin
+## Example: "ddev watch-storefront"
+
+ROOT="${DDEV_APPROOT}"
+
+function watchStorefront() {
+  ddev exec bin/watch-storefront.sh
+}
+
+watchStorefront;

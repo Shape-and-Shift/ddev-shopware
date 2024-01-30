@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+## Description: Initializes the project
+## OSTypes: linux,darwin
+
+ROOT="${DDEV_APPROOT}"
+RESOURCES_PATH="${ROOT}/.ddev/resources"
+DB_DUMP="${RESOURCES_PATH}/dump.sql.gz"
+
+function setupProject() {
+  ddev exec rm install.lock
+  ddev composer install
+  ddev exec bin/console system:install --basic-setup --drop-database
+  ddev import-db --src=${DB_DUMP}
+  ddev exec bin/build-js.sh
+  ddev exec bin/console cache:clear
+}
+
+setupProject;
